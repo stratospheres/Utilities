@@ -5,6 +5,7 @@ using System.Linq;
 using System.Reflection;
 using System.IO;
 using PowerArgs;
+using System.Text;
 
 namespace TextReplace
 {
@@ -49,7 +50,10 @@ namespace TextReplace
                                 Console.WriteLine($"From : {replacement.From}");
                                 Console.WriteLine($"To   : {replacement.To}");
 
-                                inputFileData = inputFileData.Replace(replacement.From, replacement.To);
+                                inputFileData =  
+                                    (parsedArgs.CaseInsensitive) ?
+                                    inputFileData.Replace(replacement.From, replacement.To, StringComparison.OrdinalIgnoreCase):
+                                    inputFileData.Replace(replacement.From, replacement.To);
                             }
 
                             // write it back out...
